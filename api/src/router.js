@@ -14,14 +14,14 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, callback) => {
   if (file.mimetype !== "image/png") {
-    req.fileValidationError = "Wrong File Type";
-    callback(null, false);
+    req.fileValidationError = "Wrong file type";
+    callback(null, false, new Error("Wrong file type"));
   } else {
     callback(null, true);
   }
 };
 
-const upload = multer.upload({
+const upload = multer({
   fileFilter,
   storage,
 });
